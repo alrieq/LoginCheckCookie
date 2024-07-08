@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <script>
+    function getCookie(name) {
+      var value = "; " + document.cookie;  // Added space for correct parsing -->
+      var parts = value.split("; " + name + "=");  // Corrected separator and assignment -->
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+
+    function checkSignIn() {
+      if (document.cookie.indexOf("signedIn=true") === -1) {  // Changed signedin to signedIn for consistency -->
+        window.location.href = "signin.html";  // Changed SignIn.html to signin.html for consistency -->
+      } else {
+        var username = getCookie("username");
+        document.getElementById("welcome").innerText = "Hello, " + username;  // Corrected greeting text and element ID -->
+      }
+    }
+
+    function signOut() {
+      document.cookie = "signedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";  // Corrected expires and signedIn spelling -->
+      document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";  // Corrected expires spelling -->
+      window.location.href = "signin.html";  // Changed SignIn.html to signin.html for consistency -->
+    }
+
+    window.onload = checkSignIn;
+  </script>
+</head>
+<body>
+  <h1 id="welcome">Welcome to the Home Page</h1>  <!-- Corrected element ID to welcome -->
+  <p>You are signed in.</p>
+  <button onclick="signOut()">Sign Out</button>
+</body>
+</html>

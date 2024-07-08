@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <script>
+        var validUsername = "ranad";  // Changed user to validUsername and fixed variable assignment -->
+
+        function signIn() {  // Changed SignIn to signIn for consistent naming -->
+            var username = document.getElementById("username").value;
+            if (username === validUsername) {  //Added validation for username-- >
+                document.cookie = "signedIn=true; path=/";  //Changed signedin to signedIn for consistency-- >
+                document.cookie = "username=" + username + "; path=/";  //Added username cookie-- >
+                window.location.href = "log.html";
+            } else {
+                alert("Invalid username");  //Added alert for invalid username-- >
+            }
+        }
+
+        function checkSignIn() {  //Changed checkSignin to checkSignIn for consistent naming-- >
+            if (document.cookie.indexOf("signedIn=true") !== -1) {  //Changed signedin to signedIn for consistency-- >
+                window.location.href = "log.html";
+            }
+        }
+        
+        window.onload = checkSignIn;
+    </script>
+</head>
+
+<body>
+    <h1>Sign In</h1>
+    <form onsubmit="signIn(); return false;"> <!-- Changed from to form for correct tag -->
+        <label for="username">Username:</label> <!-- Fixed spacing -->
+        <input type="text" id="username" name="username" required><br><br> <!-- Added line breaks for spacing -->
+        <label for="password">Password:</label> <!-- Corrected spelling of password -->
+        <input type="password" id="password" name="password" required><br><br>
+        <!-- Changed type to password for security and fixed name -->
+        <button type="submit">Sign In</button>
+    </form>
+</body>
+
+</html>
